@@ -10,6 +10,15 @@ const todoController = {
         const id = req.params.id
         const todo = todoModel.get(id)
         res.render('todo', { todo })
+    },
+
+    newTodo: (req, res) => {
+        res.render('addTodo')
+    },
+
+    createTodo: (req, res) => {
+        const content = req.body.content
+        res.end(content)  // send and end
     }
 }
 
