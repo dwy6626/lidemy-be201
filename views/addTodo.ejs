@@ -1,5 +1,19 @@
 <h1>Add Todo</h1>
 
+<p>
+You are
+<% if (!isLogin) { %>
+    not
+<% } %>
+logged in.
+</p>
+
+<% if (isLogin) { %>
+    <a href='/logout'>logout</a>
+<% } else { %>
+    <a href='/login'>login</a>
+<% } %> 
+
 <form method="POST" action="/todos">
     content: <input type='text' name='content' />
     <input type="submit">
