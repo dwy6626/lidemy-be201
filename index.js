@@ -12,6 +12,16 @@ app.use(session({
 // 使用 EJS 當模板系統
 app.set('view engine', 'ejs')
 
+// middleware
+app.use(express.json())  // parse JSON requests
+app.use(express.urlencoded({ extended: true }))  // parse application/x-www-form-urlencoded
+
+// login
+app.use((req, res, next) => {
+    res.locals.isLogin = req.session.isLogin  // res.locals 可以在 view 直接使用
+    next()
+})
+
 // edit body
 app.get('/hi', (req, res) => res.send('hi'))
 
@@ -23,12 +33,9 @@ app.get('/todos', todoController.getAll)
 app.get('/todo/:id', todoController.get)
 app.get('/', todoController.newTodo)
 
-// middleware and POST
-app.use(express.json())  // parse JSON requests
-app.use(express.urlencoded({ extended: true }))  // parse application/x-www-form-urlencoded
+// POST
 app.post('/todos', todoController.createTodo)
 
-// login
 app.get('/login', (req, res) => res.render('login'))
 app.post('/login', (req, res) => {
     if (req.body.password === 'abc') {

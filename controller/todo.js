@@ -13,7 +13,7 @@ const todoController = {
     },
 
     newTodo: (req, res) => {
-        res.render('addTodo', { isLogin: req.session.isLogin })
+        res.render('addTodo')
     },
 
     createTodo: (req, res) => {
